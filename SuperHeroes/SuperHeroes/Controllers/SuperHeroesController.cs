@@ -30,7 +30,9 @@ namespace SuperHeroes.Controllers
         // GET: SuperHeroes/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            IEnumerable<SuperHeroe> detailedHero = context.SuperHeroes;
+            detailedHero = context.SuperHeroes.Where(h => h.Id == id);
+            return View(detailedHero);
         }
 
         // GET: SuperHeroes/Create
@@ -59,17 +61,19 @@ namespace SuperHeroes.Controllers
         // GET: SuperHeroes/Edit/5
         public ActionResult Edit(int id)
         {
+
             return View();
         }
 
         // POST: SuperHeroes/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(SuperHeroe superheroe)
         {
             try
             {
-                // TODO: Add update logic here
-
+                var editedHero = context.SuperHeroes.Where(h => h.Id == superheroe.Id).SingleOrDefault();
+                context.SuperHeroes.Attach(editedHero);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -78,15 +82,15 @@ namespace SuperHeroes.Controllers
             }
         }
 
-        // GET: SuperHeroes/Delete/5
-        public ActionResult Delete(int id)
-        {
-            var superHero = context.SuperHeroes.Find(id);
-            return View("Index");
-        }
+        //GET: SuperHeroes/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    var superHero = context.SuperHeroes.Find(id);
+        //    return View();
+        //}
 
-        // POST: SuperHeroes/Delete/5
-        [HttpPost]
+        //POST: SuperHeroes/Delete/5
+        //[HttpPost]
         public ActionResult Delete(SuperHeroe superheroe)
         {
             try
