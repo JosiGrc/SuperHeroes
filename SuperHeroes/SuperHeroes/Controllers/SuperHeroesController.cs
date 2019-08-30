@@ -84,10 +84,10 @@ namespace SuperHeroes.Controllers
         }
 
         //GET: SuperHeroes/Delete/5
-        //public ActionResult Delete(s)
+        //public ActionResult Delete(int id)
         //{
         //    var superHero = context.SuperHeroes.Find(id);
-        //    return View(id);
+        //    return View(superHero);
         //}
 
         //POST: SuperHeroes/Delete/5
