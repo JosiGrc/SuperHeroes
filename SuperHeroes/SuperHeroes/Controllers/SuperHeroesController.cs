@@ -61,8 +61,8 @@ namespace SuperHeroes.Controllers
         // GET: SuperHeroes/Edit/5
         public ActionResult Edit(int id)
         {
-
-            return View();
+            SuperHeroe superheroe = context.SuperHeroes.Where(s => s.Id == id).First();
+            return View(superheroe);
         }
 
         // POST: SuperHeroes/Edit/5
@@ -71,10 +71,11 @@ namespace SuperHeroes.Controllers
         {
             try
             {
-                var editedHero = context.SuperHeroes.Where(h => h.Id == superheroe.Id).SingleOrDefault();
-                context.SuperHeroes.Attach(editedHero);
+                SuperHeroe heroFromDb = context.SuperHeroes.Where(s => s.Id == superheroe.Id).First();
+                UpdateModel(heroFromDb);
                 context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id=heroFromDb.Id });
+                
             }
             catch
             {
@@ -83,10 +84,10 @@ namespace SuperHeroes.Controllers
         }
 
         //GET: SuperHeroes/Delete/5
-        //public ActionResult Delete(int id)
+        //public ActionResult Delete(s)
         //{
         //    var superHero = context.SuperHeroes.Find(id);
-        //    return View();
+        //    return View(id);
         //}
 
         //POST: SuperHeroes/Delete/5
