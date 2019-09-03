@@ -74,7 +74,7 @@ namespace SuperHeroes.Controllers
                 SuperHeroe heroFromDb = context.SuperHeroes.Where(s => s.Id == superheroe.Id).First();
                 UpdateModel(heroFromDb);
                 context.SaveChanges();
-                return RedirectToAction("Details", new { id=heroFromDb.Id });
+                return RedirectToAction("Details", new { id=heroFromDb.Id });//goes back to the hero table (making a new object using the hero
                 
             }
             catch
@@ -84,15 +84,15 @@ namespace SuperHeroes.Controllers
         }
 
         //GET: SuperHeroes/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    var superHero = context.SuperHeroes.Find(id);
-        //    return View(superHero);
-        //}
+        public ActionResult Delete(int id)
+        {
+            var superHero = context.SuperHeroes.Find(id);
+            return View(superHero);
+        }
 
         //POST: SuperHeroes/Delete/5
-        //[HttpPost]
-        public ActionResult Delete(SuperHeroe superheroe)
+        [HttpPost]
+        public ActionResult Delete(int id, SuperHeroe superheroe)
         {
             try
             {
